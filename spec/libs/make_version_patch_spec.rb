@@ -49,7 +49,7 @@ describe Differ::MakeVersionPatch do
   end
 
   after(:all) do
-    FileUtils.rm_rf(Dir[@store_path])
+    FileUtils.rm_rf("#{Rails.root}/public/test/patch/")
   end
   
 end
