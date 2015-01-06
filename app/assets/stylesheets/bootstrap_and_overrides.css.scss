@@ -1,3 +1,8 @@
+@import "bootswatch/paper/variables";
 @import "bootstrap";
-body { padding-top: 60px; }
-@import "bootstrap-responsive";
+
+body { padding-top: 90px; }
+
+// @import "bootstrap-responsive";
+@import "bootswatch/paper/bootswatch";
+@import "font-awesome";

@@ -10,7 +10,7 @@ group :assets do
   gem 'jquery-fileupload-rails'
 end
 gem 'jquery-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '3.1.1.0'
 gem 'cancan'
 gem 'devise'
 gem 'figaro', '~> 1.0.0'
@@ -22,6 +22,9 @@ gem 'will_paginate', '~> 3.0'
 gem 'therubyracer'
 gem 'execjs'
 gem 'puma'
+# gem 'bootswatch-rails', '~> 3.2.4'
+gem 'font-awesome-sass', '~> 4.2.0'
+
 
 group :development do
   gem 'better_errors'
