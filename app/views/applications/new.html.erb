@@ -1,5 +1,10 @@
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
 <h1><%= t('application.New') %></h1>
 
+<div class="well">
 <%= render 'form' %>
-
-<%= link_to t('normal.Back'), applications_path %>
+</div>
+<%= link_to t('normal.Back'), applications_path, class: 'btn btn-default' %>
+</div>
+</div>

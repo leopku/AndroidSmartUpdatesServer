@@ -16,7 +16,7 @@ gem 'devise'
 gem 'figaro', '~> 1.0.0'
 gem 'rolify'
 gem 'simple_form'
-gem 'paperclip'
+gem 'paperclip', '~> 3.1.0'
 gem 'ruby_apk'
 gem 'will_paginate', '~> 3.0'
 gem 'therubyracer'
@@ -24,7 +24,7 @@ gem 'execjs'
 gem 'puma'
 # gem 'bootswatch-rails', '~> 3.2.4'
 gem 'font-awesome-sass', '~> 4.2.0'
-
+gem 'zeroclipboard-rails', '~> 0.1.0'
 
 group :development do
   gem 'better_errors'

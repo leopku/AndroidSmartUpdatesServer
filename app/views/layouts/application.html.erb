@@ -5,29 +5,32 @@
     <title><%= content_for?(:title) ? yield(:title) : "Android Smart Updates" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Android Smart Updates" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
+
           <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </div>
-    <div id="main" role="main">
-      <div class="container">
-         <div class="row">
-          <div class="span12">
-            <%= render 'layouts/messages' %>
-            <%= yield %>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <%= render 'layouts/messages' %>
+              </div>
+            </div>
           </div>
-        </div>
-        <footer>
+            
+<div class="container">
+            <%= yield %>
+</div>
+
+        <footer class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="well">&copy; 2015</div>
+            </div>
+          </div>
         </footer>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+    <%= javascript_include_tag "application" %>
+            
   </body>
 </html>

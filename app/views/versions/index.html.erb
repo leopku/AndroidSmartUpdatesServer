@@ -1,29 +1,69 @@
-<table class="table">
+  <div class="row">
+    <div class="col-xs-12">
+<table class="table table-striped table-hover">
+  <thead>
   <tr>
-    <th><%= t("activerecord.attributes.version.version_code") %></th>
-    <th><%= t("activerecord.attributes.version.version_name") %></th>
+    <th><%= t("activerecord.models.version") %></th>
+    <!-- <th><%#= t("activerecord.attributes.version.version_name") %></th> -->
     <th><%= t("activerecord.attributes.version.description") %></th>
-    <th><%= t("activerecord.attributes.version.user_id") %></th>
-    <th><%= t("activerecord.attributes.version.application_id") %></th>
+    <!-- <th><%#= t("activerecord.attributes.version.user_id") %></th> -->
+    <!-- <th><%#= t("activerecord.attributes.version.application_id") %></th> -->
+    <th>patchs check url</th>
+    <th>patchs download url</th>
     <th><%= t("application.operation") %></th>
   </tr>
+  </thead>
 
 <% @page_versions = @versions.paginate(:page => params[:page]) %>
+<tbody>
 <% @page_versions.each do |version| %>
   <tr>
     <td><%= version.version_code %></td>
-    <td><%= version.version_name %></td>
-    <td><%= version.description %></td>
-    <td><%= version.user_id %></td>
-    <td><%= version.application_id %></td>
-    <td class="btn-group">
-    <%= link_to t('version.show'), application_version_path(@application,version), :class => "btn" %>
-    <%= link_to t('version.edit'), edit_application_version_path(@application,version), :class => "btn" if version == @versions.last %>
-    <%= link_to t('version.destroy'), application_version_path(@application,version), method: :delete, data: { confirm: t('application.delete_sure')},:class => "btn" if version == @versions.last %>
+    <!-- <td><%#= version.version_name %></td> -->
+    <td><span class="label label-default"><%= version.version_name %></span> <%= version.description %></td>
+    <!-- <td><%#= version.user_id %></td> -->
+    <!-- <td><%#= version.application_id %></td> -->
+    <td><%= truncate check_patchs_url(@application, Base64.urlsafe_encode64(@application.package_name), version) %><button class="btn btn-info btn-xs" data-clipboard-text="<%= check_patchs_url(@application, Base64.urlsafe_encode64(@application.package_name), version) %>">复制</button></td>
+    <td><%= truncate down_patchs_url(@application, Base64.urlsafe_encode64(@application.package_name), version) %><button class="btn btn-info btn-xs" data-clipboard-text="<%= down_patchs_url(@application, Base64.urlsafe_encode64(@application.package_name), version) %>">复制</button></td>
+    <td>
+      <div class="btn-group">
+        <%= link_to t('version.show'), application_version_path(@application,version), :class => "btn btn-default btn-xs" %>
+        <%= link_to t('version.edit'), edit_application_version_path(@application,version), :class => "btn btn-default btn-xs" if version == @versions.last %>
+        <%= link_to t('version.destroy'), application_version_path(@application,version), method: :delete, data: { confirm: t('application.delete_sure')},:class => "btn btn-danger btn-xs" if version == @versions.last %>
+        
+      </div>
   </tr>
 <% end %>
+</tbody>
 </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    
 <%= will_paginate @page_versions %>
 
-<br />
-<%= link_to t('version.new_version'), new_application_version_path(@application) , :class => "btn" %>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">url rule for check</div>
+      <div class="panel-body">/api/update/:application_id/:base64(:package_name)/:current_version_code</div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">url rule for download</div>
+      <div class="panel-body">/api/download/:application_id/:base64(:package_name)/:current_version_code</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    
+<%= link_to t('version.new_version'), new_application_version_path(@application) , :class => "btn btn-primary" %>
+</div>
+</div>

@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
 //= require jquery-fileupload
+//= require zeroclipboard
+//= require_tree .
