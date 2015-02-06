@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+development:
+  <<: *default
+  database: android-update-server_development
+
+
+test:
+  <<: *default
+  database: android-update-server_test
+
+
+production:
+  <<: *default
+  database: android-update-server_production
+  username: ihoolai
+  password: <%= ENV['AUS_DATABASE_PASSWORD'] %>
