@@ -24,7 +24,7 @@ module Differ::MakeVersionPatch
     File.size(path)
   end
 
-  private
+  # private
 
   def get_patch_file_name(last_version,new_version)
     "#{last_version.version_code}_#{new_version.version_code}.patch"
@@ -35,13 +35,13 @@ module Differ::MakeVersionPatch
   end
 
   def get_prefix_path(new_version)
-    get_store_path + get_store_path_padding(new_version)
+    get_store_path + 'patch/'+ get_store_path_padding(new_version)
   end
   
   def get_store_path
     sub_path = Rails.env.to_s + "/" unless Rails.env.production?
     sub_path ||= ""
-    "#{Rails.root}/public/#{sub_path}patch/"
+    "#{Rails.root}/public/#{sub_path}"
   end
 
   def create_folder(path)

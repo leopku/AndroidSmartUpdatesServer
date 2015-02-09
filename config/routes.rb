@@ -17,5 +17,7 @@ AndroidSmartUpdates::Application.routes.draw do
 
   match 'api/download/:application_id/:package_name/:current_version' => 'api#download', 
         :constraints => {:application_id => /\d+/ , :current_version => /\d+/}, as: :down_patchs
+
+  match 'api/check/' => 'api#auto_check', as: :auto_check
         
 end

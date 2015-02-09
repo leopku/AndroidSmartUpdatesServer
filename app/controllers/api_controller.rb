@@ -36,7 +36,7 @@ class ApiController < ApplicationController
   def update
     json = @last_version.to_json_hash
     json.merge!({"apk_patch_size" => patch_size})
-    render_result "has_update", json
+    render_result "incremental", json
   end
 
   def download
@@ -52,4 +52,18 @@ class ApiController < ApplicationController
     Differ::MakeVersionPatch.get_patch_size(@current_version, @last_version)
   end
 
+  def auto_check
+    logger.info(ENV['HOST'])
+    logger.info(ENV['PORT'])
+    @os_version = params[:os_version]
+    @imei = params[:imei]
+    @client_name = params[:user_name].present? ? params[:user_name] : nil
+    @client_id = params[:user_id].present? ? params[:user_id] : nil
+
+    if @os_version <= '4.1'
+      render_result "full", { path: "http://#{ENV['HOST']}:#{ENV['PORT']}/development/apks/user_#{@application.user_id}/application_#{@application.id}/version_code_#{@last_version.id}.apk" }
+    else
+      self.update
+    end
+  end
 end
