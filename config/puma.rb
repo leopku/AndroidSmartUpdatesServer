@@ -2,7 +2,7 @@
 # @Author: leopku
 # @Date:   2015-01-31 09:26:28
 # @Last Modified by:   leopku
-# @Last Modified time: 2015-02-11 14:15:41
+# @Last Modified time: 2015-02-11 14:29:20
 # environment ENV['RAILS_ENV']
 APP_ROOT = File.expand_path('../..', __FILE__)
 pidfile "#{APP_ROOT}/tmp/puma.pid"
@@ -18,6 +18,7 @@ daemonize true
 workers 1
 threads 0,4
 preload_app!
+tag 'AndriodSmartUpdateServer'
 
 on_worker_boot do
   require 'active_record'

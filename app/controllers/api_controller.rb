@@ -53,15 +53,19 @@ class ApiController < ApplicationController
   end
 
   def auto_check
-    logger.info(ENV['HOST'])
-    logger.info(ENV['PORT'])
     @os_version = params[:os_version]
     @imei = params[:imei]
     @client_name = params[:user_name].present? ? params[:user_name] : nil
     @client_id = params[:user_id].present? ? params[:user_id] : nil
 
+    env = ENV['RAILS_ENV'] || ENV['RACK_ENV']
+    apk_path = env == 'production' ? '' : "#{env}/"
+
     if @os_version <= '4.1'
-      render_result "full", { path: "http://#{ENV['HOST']}:#{ENV['PORT']}/development/apks/user_#{@application.user_id}/application_#{@application.id}/version_code_#{@last_version.id}.apk" }
+      render_result "full", { 
+        description: @last_version.description,
+        path: "http://#{ENV['HOST']}:#{ENV['PORT']}/#{apk_path}apks/user_#{@application.user_id}/application_#{@application.id}/version_code_#{@last_version.id}.apk" 
+      }
     else
       self.update
     end
