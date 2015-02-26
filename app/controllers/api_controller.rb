@@ -63,6 +63,8 @@ class ApiController < ApplicationController
 
     if @os_version <= '4.1'
       render_result "full", { 
+        version: @last_version.version_name,
+        size: @last_version.apk_file_size,
         description: @last_version.description,
         path: "http://#{ENV['HOST']}:#{ENV['PORT']}/#{apk_path}apks/user_#{@application.user_id}/application_#{@application.id}/version_code_#{@last_version.id}.apk" 
       }
